@@ -3,9 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>cat-weather-app</title>
+    <link rel="stylesheet" href="/src/static/index.css">
+
 </head>
+
 <body>
+    <main>
+        <!--set location 1st screen view-->
+        <section class="set-location">
+            <p>set location</p>
+            <input type="text">
+            <button>go</button>
+        </section>
+
+        <!--weather app 2nd screen view -->
+        <header>
+            <button class="back-button">
+                <img src="/src/static/assets/backbutton.png">
+            </button>
+
+            <button class="minimise-button">
+                <img src="/src/static/assets/minimiseapp.png">
+            </button>
+
+            <button class="close-button">
+                <img src="/src/static/assets/closeapp.png">
+            </button>
+        </header>
+
+        <section class="main-container">
+            <img class="weather-icon" src="/src/static/assets/rainy.png">
+            <p class="weather-status">rainy</p>
+            <img class="cat-icon" src="/src/static/assets/placeholder.png">
+            <p class="forecast-header">forecast</p>
+
+            <article class="forecast-container">
+                <article class="forecast-item">
+                    <img class="day-one-icon" src="/src/static/assets/snowy.png">
+                    <p class="day-one-text">mon</p>
+                </article>
+
+                <article class="forecast-item">
+                    <img class="day-two-icon" src="/src/static/assets/snowy.png">
+                    <p class="day-two-text">tue</p>
+                </article>
+
+                <article class="forecast-item">
+                    <img class="day-three-icon" src="/src/static/assets/snowy.png">
+                    <p class="day-three-text">wed</p>
+                </article>
+            </article>
+        </section>
+
+
+    </main>
+
     
 </body>
+
 </html>

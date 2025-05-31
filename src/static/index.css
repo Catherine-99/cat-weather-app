@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+img {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges; /* fallback for some browsers */
+}
+
+p {
+    font-family: "Pixelify Sans", sans-serif;
+    color: #4D4A3C;
+}
+
+body {
+    background-color: #F6EFE9;
+}
+
+
+
+
+/*header section */
+header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+header button{
+    all: unset
+}
+
+header button img{
+    height: 25px;
+    width: 25px;
+}
+
+.close-button{
+    align-self: flex-start;
+}
+
+
+
+/*set location view 1st screen*/
+.set-location {
+    display: none
+}
+
+
+
+/*main view 2nd screen*/
+.main-container{
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 200px;
+}
+
+.weather-icon{
+    height: 120px;
+    width: 120px;
+    margin-bottom: 10px;
+
+}
+
+.weather-status{
+    font-size: 2.5em;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.cat-icon{
+    margin-left: 35px;
+    margin-top: 20px;
+    height: 230px;
+    width: 230px;
+   
+}
+
+
+/*forecast section*/
+.forecast-header{
+    font-size: 3rem;
+    margin-top: 10px;
+    margin-bottom: 0px;
+
+}
+
+.forecast-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.forecast-container img{
+    height: 80%;
+    margin-top: 0px;
+    margin-left: 10px;
+   
+}
+
+.forecast-container p {
+    font-size: 2rem;
+    margin-left: 20px;
+    margin-right: 25px;
+    margin-top: 0px;
+}
+
+.forecast-item{
+    margin: 0px;
+}
