@@ -5,19 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cat-weather-app</title>
     <link rel="stylesheet" href="/src/static/index.css">
+    <script src="/src/static/index.js" defer></script>
 
 </head>
 
 <body>
     <main>
-        <!--set location 1st screen view-->
-        <section class="set-location">
-            <p>set location</p>
-            <input type="text">
-            <button>go</button>
-        </section>
-
-        <!--weather app 2nd screen view -->
         <header>
             <button id="back-button" class="left-button">
                 <img src="/src/static/assets/backbutton.png">
@@ -35,10 +28,24 @@
             
         </header>
 
-        <section class="main-container">
+
+        <!--set location screen 1 view-->
+        <section id="set-location">
+            <p>set location:</p>
+            <input id="'location-input", type="text", placeholder="start typing...">
+            <button id="go-button">go</button>
+        </section>
+
+        
+        
+
+        <!--weather app screen 2 view -->
+        <section id="main-container">
             <img class="weather-icon" src="/src/static/assets/rainy.png">
             <p class="weather-status">rainy</p>
-            <img class="cat-icon" src="/src/static/assets/placeholder.png">
+            <canvas>
+                <img class="cat-icon" src="/src/static/assets/placeholder.png">
+            </canvas>
             <p class="forecast-header">forecast</p>
 
             <article class="forecast-container">

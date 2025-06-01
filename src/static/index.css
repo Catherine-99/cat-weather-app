@@ -56,14 +56,44 @@ header button img{
 
 
 /*set location view 1st screen*/
-.set-location {
-    display: none
+#set-location {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 200px;
+}
+
+#set-location p{
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+#set-location input{
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 1.5rem;
+    padding: 5px 15px;
+    border: 3px solid #4D4A3C;
+    border-radius: 20px;
+    background-color: #F6EFE9;
+    color: #4D4A3C;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+#go-button{
+    background-color: #9EB36A;
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 1.5rem;
+    padding: 5px 20px;
+    border-radius: 20px;   
+    border: none;
+    cursor: pointer;
 }
 
 
-
 /*main view 2nd screen*/
-.main-container{
+#main-container{
     margin-top: 80px;
     display: flex;
     flex-wrap: wrap;
