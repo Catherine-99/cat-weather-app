@@ -16,7 +16,9 @@ body {
     min-width: 400px;
 }
 
-
+canvas {
+    margin-left: 30px;
+}
 
 
 /*header section */
@@ -115,13 +117,6 @@ header button img{
     margin-bottom: 5px;
 }
 
-.cat-icon{
-    margin-left: 35px;
-    margin-top: 20px;
-    height: 230px;
-    width: 230px;
-   
-}
 
 
 /*forecast section*/
