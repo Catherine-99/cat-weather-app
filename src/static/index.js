@@ -19,7 +19,7 @@ function switchToLocation() {
 
 }
 
-goButton.addEventListener('click', switchToWeather);
+//goButton.addEventListener('click', switchToWeather);
 backButton.addEventListener('click', switchToLocation);
 
 //cat animation 
@@ -55,10 +55,112 @@ function animate(){
 animate();
 
 
-//get weather data based on location 
+//render correct animation
+function renderAnimation(data){
+    let weather = data['current_conditions']
+    if (weather === 'overcast' || weather === 'foggy') {
+        frameY = 0;
+    } else if (weather === 'cloudy' || weather === 'windy') {
+        frameY = 1
+    } else if (weather === 'snowy') {
+        frameY = 2
+    } else if (weather === 'rainy' || weather === 'hailing') {
+        frameY = 3 
+    } else if (weather ==='sunny') {
+        frameY = 4
+    } else if (weather ==='thunderstorms') {
+        frameY = 5
+    }
+// cat 0 --> overcast, foggy; cat 1 --> cloudy, windy; cat 2 --> snowy; cat 3 --> rainy, hailing; cat 4 --> sunny
+// cat 5 --> thunderstorms
+}
 
-//get location input from user, send this to the backend, retrieve coordinates in th ebackend
-//then retrieve weather data and forecast in backend
-//send data to front end
-//display correct cat animation, weather icon, forecast icon and weekdays 
-//
+
+
+//render weather icons and forecast
+function renderWeatherData(data){
+    let weatherConditions = data['current_conditions']
+    let weatherIcon = document.getElementById('weather-icon');
+    let iconSrc = `/src/static/assets/${weatherConditions}.png`;
+
+    weatherIcon.src = iconSrc;
+    console.log(iconSrc)
+}
+
+
+//render weather text
+function renderWeatherText(data){
+    let tempDisplay = document.getElementById('weather-status');
+    let currentTemp = data['current_temp'];
+    let currentCond = data['current_conditions'];
+
+    tempDisplay.textContent = `${currentTemp}°C / ${currentCond}`
+}
+
+//render forecast 
+function renderForecast(data){
+    let dayOneIcon = document.getElementById('day-one-icon');
+    let dayOneText = document.getElementById('day-one-text');
+
+    let dayTwoIcon = document.getElementById('day-two-icon');
+    let dayTwoText = document.getElementById('day-two-text');
+
+    let dayThreeIcon = document.getElementById('day-three-icon');
+    let dayThreeText = document.getElementById('day-three-text');
+
+    let dayOneCond = data['forecast']['weather_codes'][1];
+    let dayOneDay = data['forecast']['days'][1];
+
+    let dayTwoCond = data['forecast']['weather_codes'][2];
+    let dayTwoDay = data['forecast']['days'][2];
+
+    let dayThreeCond = data['forecast']['weather_codes'][3];
+    let dayThreeDay = data['forecast']['days'][3];
+
+    dayOneIcon.src = `/src/static/assets/${dayOneCond}.png`
+    dayOneText.textContent = dayOneDay
+
+    dayTwoIcon.src = `/src/static/assets/${dayTwoCond}.png`
+    dayTwoText.textContent = dayTwoDay
+
+    dayThreeIcon.src = `/src/static/assets/${dayThreeCond}.png`
+    dayThreeText.textContent = dayThreeDay
+}
+
+
+//get weather data based on location and render data
+goButton.addEventListener('click', async() => {
+    let cityInput = document.getElementById('location-input').value;
+
+    if (!cityInput) {
+        alert('Please enter your city');
+        return 
+    }
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/get-weather', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({city: cityInput})
+        });
+
+        const data = await response.json();  
+        
+        console.log(data);
+
+        switchToWeather();
+        renderWeatherData(data);
+        renderWeatherText(data)
+        renderForecast(data);
+        renderAnimation(data)
+
+        if (!response.ok) throw new Error('Network not responding');  
+    } 
+    
+    catch (error) {
+        console.error('error fetching weather data:', error)
+    }
+});
+

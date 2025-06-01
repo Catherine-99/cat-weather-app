@@ -40,6 +40,7 @@ header button img{
 }
 
 .left-button{
+    display: none;
     grid-column: 1;
 }
 
@@ -59,7 +60,7 @@ header button img{
 
 /*set location view 1st screen*/
 #set-location {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
@@ -96,22 +97,23 @@ header button img{
 
 /*main view 2nd screen*/
 #main-container{
+    display: none;
     margin-top: 80px;
-    display: flex;
+    
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     margin-bottom: 200px;
 }
 
-.weather-icon{
-    height: 120px;
-    width: 120px;
+#weather-icon{
+    height: auto;
+    width: 150px;
     margin-bottom: 10px;
 
 }
 
-.weather-status{
+#weather-status{
     font-size: 2.5em;
     margin-top: 0px;
     margin-bottom: 5px;
@@ -137,7 +139,7 @@ header button img{
 .forecast-container img{
     height: 80%;
     margin-top: 0px;
-    margin-left: 10px;
+    
    
 }
 
@@ -149,5 +151,5 @@ header button img{
 }
 
 .forecast-item{
-    margin: 0px;
+    margin: 10px;
 }
