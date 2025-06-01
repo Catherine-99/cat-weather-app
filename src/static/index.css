@@ -12,6 +12,8 @@ p {
 
 body {
     background-color: #F6EFE9;
+    margin: 0;
+    min-width: 400px;
 }
 
 
@@ -19,9 +21,11 @@ body {
 
 /*header section */
 header{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+   
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 20px;
+    background-color: #9EB36A;
 }
 
 header button{
@@ -29,13 +33,25 @@ header button{
 }
 
 header button img{
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 30px;
 }
 
-.close-button{
-    align-self: flex-start;
+.left-button{
+    grid-column: 1;
 }
+
+
+.right-button{
+    grid-column: 3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+
+
 
 
 
