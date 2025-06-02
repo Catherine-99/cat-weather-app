@@ -13,7 +13,7 @@ p {
 body {
     background-color: #F6EFE9;
     margin: 0;
-    min-width: 400px;
+    min-width: 590px;
 }
 
 canvas {
@@ -23,7 +23,6 @@ canvas {
 
 /*header section */
 header{
-   
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 20px;
@@ -52,10 +51,6 @@ header button img{
     justify-content: flex-end;
     gap: 20px;
 }
-
-
-
-
 
 
 /*set location view 1st screen*/
@@ -99,7 +94,6 @@ header button img{
 #main-container{
     display: none;
     margin-top: 80px;
-    
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
@@ -110,7 +104,6 @@ header button img{
     height: auto;
     width: 150px;
     margin-bottom: 10px;
-
 }
 
 #weather-status{
@@ -126,7 +119,6 @@ header button img{
     font-size: 3rem;
     margin-top: 10px;
     margin-bottom: 0px;
-
 }
 
 .forecast-container{
@@ -134,22 +126,29 @@ header button img{
     flex-wrap: wrap;
     flex-direction: row;
     margin-top: 10px;
+    margin-left: 20px;
 }
 
 .forecast-container img{
     height: 80%;
     margin-top: 0px;
-    
-   
 }
 
 .forecast-container p {
     font-size: 2rem;
-    margin-left: 20px;
-    margin-right: 25px;
+    padding-right: 30px;
     margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .forecast-item{
     margin: 10px;
+}
+
+.forecast-temp{
+    margin-right: 15px;
+}
+
+.forecast-text{
+    margin-left: 20px;
 }
