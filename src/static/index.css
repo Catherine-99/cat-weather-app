@@ -2,7 +2,7 @@
 
 img {
     image-rendering: pixelated;
-    image-rendering: crisp-edges; /* fallback for some browsers */
+    image-rendering: crisp-edges; 
 }
 
 p {
@@ -27,7 +27,10 @@ canvas {
 header{
     display: grid;
     grid-template-columns: auto auto auto;
-    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 15px;
     background-color: #9EB36A;
 }
 
@@ -95,7 +98,7 @@ header button img{
 /*main view 2nd screen*/
 #main-container{
     display: none;
-    margin-top: 60px;
+    margin-top: 80px;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
