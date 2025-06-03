@@ -3,7 +3,7 @@ from flask_cors import CORS
 import requests
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app) 
 
 @app.route('/')

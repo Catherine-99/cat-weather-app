@@ -13,7 +13,9 @@ p {
 body {
     background-color: #F6EFE9;
     margin: 0;
-    min-width: 590px;
+    min-width: 500px;
+    min-height: 680px;
+    overflow-y: hidden;
 }
 
 canvas {
@@ -34,8 +36,8 @@ header button{
 }
 
 header button img{
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
 }
 
 .left-button{
@@ -83,7 +85,7 @@ header button img{
     background-color: #9EB36A;
     font-family: "Pixelify Sans", sans-serif;
     font-size: 1.5rem;
-    padding: 5px 20px;
+    padding: 5px 50px;
     border-radius: 20px;   
     border: none;
     cursor: pointer;

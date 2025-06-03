@@ -34,7 +34,7 @@ const canvasWidth = canvas.width = 230;
 const canvasHeight = canvas.height = 230;
 
 const catImage = new Image();
-catImage.src = '/src/static/assets/catsprites.png';
+catImage.src = '/static/assets/catsprites.png';
 context.imageSmoothingEnabled = false;
 
 const spriteWidth = 64;
@@ -86,7 +86,7 @@ function renderAnimation(data){
 function renderWeatherData(data){
     let weatherConditions = data['current_conditions']
     let weatherIcon = document.getElementById('weather-icon');
-    let iconSrc = `/src/static/assets/${weatherConditions}.png`;
+    let iconSrc = `/static/assets/${weatherConditions}.png`;
 
     weatherIcon.src = iconSrc;
     console.log(iconSrc)
@@ -128,15 +128,15 @@ function renderForecast(data){
     let dayThreeDay = data['forecast']['days'][3];
     let dayThreeTemp = data['forecast']['temps'][3];
 
-    dayOneIcon.src = `/src/static/assets/${dayOneCond}.png`;
+    dayOneIcon.src = `/static/assets/${dayOneCond}.png`;
     dayOneText.textContent = dayOneDay;
     dayOneTempText.textContent = `${dayOneTemp}°C`;
 
-    dayTwoIcon.src = `/src/static/assets/${dayTwoCond}.png`;
+    dayTwoIcon.src = `/static/assets/${dayTwoCond}.png`;
     dayTwoText.textContent = dayTwoDay;
     dayTwoTempText.textContent = `${dayTwoTemp}°C`;
 
-    dayThreeIcon.src = `/src/static/assets/${dayThreeCond}.png`;
+    dayThreeIcon.src = `/static/assets/${dayThreeCond}.png`;
     dayThreeText.textContent = dayThreeDay;
     dayThreeTempText.textContent = `${dayThreeTemp}°C`;
 }
@@ -193,3 +193,16 @@ goButton.addEventListener('click', async() => {
 
 });
 
+
+
+//make close and minimise buttons functional with electron
+const minimizeBtn = document.getElementById('minimise-button');
+const closeBtn = document.getElementById('close-button');
+
+minimizeBtn.addEventListener('click', () => {
+  window.electronAPI.minimizeWindow();
+});
+
+closeBtn.addEventListener('click', () => {
+  window.electronAPI.closeWindow();
+});
