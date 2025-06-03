@@ -17,7 +17,7 @@ def get_coordinates(city_name):
         'q':city_name,
         'format': 'json',
         'limit': 1,
-        'countrycodes': 'gb,us,ca,de,at,lt,pl'
+        'countrycodes': 'gb,us,ca,de,at,lt,pl,in,cn,jp,kr,sg,th,my'
     }
 
     #api call to nominatim api
