@@ -73,7 +73,7 @@ function renderAnimation(data){
         frameY = 3 
     } else if (weather ==='sunny') {
         frameY = 4
-    } else if (weather ==='thunderstorms') {
+    } else if (weather ==='thunderstorm') {
         frameY = 5
     }
 // cat 0 --> overcast, foggy; cat 1 --> cloudy, windy; cat 2 --> snowy; cat 3 --> rainy, hailing; cat 4 --> sunny
