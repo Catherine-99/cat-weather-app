@@ -250,3 +250,10 @@ goButton.addEventListener('click', fetchUserCoordinates);
 const minimiseButton = document.getElementById('minimise-button');
 const closeButton = document.getElementById('close-button');
 
+minimiseButton.addEventListener('click', () => {
+    window.electronAPI.minimize();
+  });
+  
+  closeButton.addEventListener('click', () => {
+    window.electronAPI.close();
+  });
