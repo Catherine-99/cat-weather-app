@@ -62,7 +62,7 @@ All icons and sprites are original artwork created by me in Aseprite. Please do 
 
 
 
-
+---
 
 Thanks for checking out my project! Feel free to reach out if you have questions or want to contribute.
 
