@@ -181,16 +181,10 @@ async function fetchUserCoordinates(){
     const response = await fetch(coordinates_url);
     const data = await response.json();
 
-    console.log(data);
+    let longitude = data.results[0].longitude;
+    let latitude = data.results[0].latitude;
 
-    let longitude = data.results[0].longitude
-    let latitude = data.results[0].latitude
-    console.log(longitude,latitude)
-
-    fetchWeatherData(longitude, latitude)
-    //get lat and lon, make variable for city name get from user input 
-    //fetch weather data using lat and lon
-    //render page 2 based on weather codes
+    fetchWeatherData(longitude, latitude);
 }
 
 
