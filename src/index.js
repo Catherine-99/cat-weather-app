@@ -1,10 +1,9 @@
-//switch between screen 1 (set location) and screen 2 (view weather forecast)
+//Toggle between states
 const goButton = document.getElementById('go-button');
 const backButton = document.getElementById('back-button');
 
 const screenOne = document.getElementById('set-location')
 const screenTwo = document.getElementById('main-container');
-
 
 function switchToWeather() {
     screenOne.style.display = 'none';
@@ -16,16 +15,12 @@ function switchToLocation() {
     screenOne.style.display = 'flex';
     screenTwo.style.display = 'none';
     backButton.style.display = 'none';
-
 }
 
-//goButton.addEventListener('click', switchToWeather);
 backButton.addEventListener('click', ()=> {
      switchToLocation();
-    if (refreshIntervalId) {
-        clearInterval(refreshIntervalId);
-        refreshIntervalId = null;
-    }});
+});
+
 
 //cat animation 
 const canvas = document.getElementById('cat-animation');
@@ -34,7 +29,7 @@ const canvasWidth = canvas.width = 230;
 const canvasHeight = canvas.height = 230;
 
 const catImage = new Image();
-catImage.src = '/static/assets/catsprites.png';
+catImage.src = 'assets/catsprites.png';
 context.imageSmoothingEnabled = false;
 
 const spriteWidth = 64;
@@ -42,10 +37,10 @@ const spriteHeight = 64;
 
 let frameX = 0;
 
-//frameY is which cat to display according to the weather 
+//frameY = which cat to display according to the weather 
 let frameY = 0;
 let frame = 0;
-const staggerFrames = 20;
+const staggerFrames = 20; //animation speed
 
 function animate(){
     context.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -58,7 +53,6 @@ function animate(){
     requestAnimationFrame(animate);
 }
 animate();
-
 
 //render corresponding animation
 function renderAnimation(data){
@@ -80,13 +74,44 @@ function renderAnimation(data){
 // cat 5 --> thunderstorms
 }
 
+const weatherIconMap = {
+    0: "sunny",
+    1: "cloudy",
+    2: "cloudy",
+    3: "overcast",
+    45: "foggy",
+    48: "foggy",
+    51: "rainy",
+    53: "rainy",
+    55: "rainy",
+    56: "hail",
+    57: "hail",
+    61: "rainy",
+    63: "rainy",
+    65: "rainy",
+    66: "hail",
+    67: "hail",
+    71: "snowy",
+    73: "snowy",
+    75: "snowy",
+    77: "snowy",
+    80: "rainy",
+    81: "rainy",
+    82: "rainy",
+    85: "snowy",
+    86: "snowy",
+    95: "thunderstorm",
+    96: "thunderstorm",
+    99: "thunderstorm"
+  };
 
+  
 
 //render weather icons and forecast
 function renderWeatherData(data){
     let weatherConditions = data['current_conditions']
     let weatherIcon = document.getElementById('weather-icon');
-    let iconSrc = `/static/assets/${weatherConditions}.png`;
+    let iconSrc = `assets/${weatherConditions}.png`;
 
     weatherIcon.src = iconSrc;
     console.log(iconSrc)
@@ -116,93 +141,118 @@ function renderForecast(data){
     let dayThreeText = document.getElementById('day-three-text');
     let dayThreeTempText = document.getElementById('day-three-temp');
 
-    let dayOneCond = data['forecast']['weather_codes'][1];
-    let dayOneDay = data['forecast']['days'][1];
-    let dayOneTemp = data['forecast']['temps'][1];
+    let dayOneCond = data['cond_day_1'];
+    let dayOneDay = data['date_day_1'];
+    let dayOneTemp = data['temp_day_1'];
 
-    let dayTwoCond = data['forecast']['weather_codes'][2];
-    let dayTwoDay = data['forecast']['days'][2];
-    let dayTwoTemp = data['forecast']['temps'][2];
+    let dayTwoCond = data['cond_day_2'];
+    let dayTwoDay = data['date_day_2'];
+    let dayTwoTemp = data['temp_day_2'];
 
-    let dayThreeCond = data['forecast']['weather_codes'][3];
-    let dayThreeDay = data['forecast']['days'][3];
-    let dayThreeTemp = data['forecast']['temps'][3];
+    let dayThreeCond = data['cond_day_3'];
+    let dayThreeDay = data['date_day_3'];
+    let dayThreeTemp = data['temp_day_3'];
 
-    dayOneIcon.src = `/static/assets/${dayOneCond}.png`;
+    dayOneIcon.src = `assets/${dayOneCond}.png`;
     dayOneText.textContent = dayOneDay;
     dayOneTempText.textContent = `${dayOneTemp}°C`;
 
-    dayTwoIcon.src = `/static/assets/${dayTwoCond}.png`;
+    dayTwoIcon.src = `assets/${dayTwoCond}.png`;
     dayTwoText.textContent = dayTwoDay;
     dayTwoTempText.textContent = `${dayTwoTemp}°C`;
 
-    dayThreeIcon.src = `/static/assets/${dayThreeCond}.png`;
+    dayThreeIcon.src = `assets/${dayThreeCond}.png`;
     dayThreeText.textContent = dayThreeDay;
     dayThreeTempText.textContent = `${dayThreeTemp}°C`;
 }
 
 
 
-//function to fetch and render weather data 
-let refreshIntervalId = null;
-let currentCity = null;
+//function to fetch coordinates
+async function fetchUserCoordinates(){
+    let user_location = document.getElementById("location-input").value;
+    //check if user entered a location, if not alert to enter
+    if (!user_location) {
+        alert("enter a location");
+        return; 
+      }
+    const coordinates_url = `https://geocoding-api.open-meteo.com/v1/search?name=${user_location}`;
 
-async function fetchAndRenderWeatherData(city){
-    try {
-        const response = await fetch('http://127.0.0.1:5000/get-weather', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ city })
-        });
+    const response = await fetch(coordinates_url);
+    const data = await response.json();
 
-        if (!response.ok) throw new Error('Network not responding');
+    console.log(data);
 
-        const data = await response.json();
+    let longitude = data.results[0].longitude
+    let latitude = data.results[0].latitude
+    console.log(longitude,latitude)
 
-        console.log(data);
-
-        renderWeatherData(data);
-        renderWeatherText(data);
-        renderForecast(data);
-        renderAnimation(data);
-
-    } catch (error) {
-        console.error('error fetching weather data:', error);
-    }
+    fetchWeatherData(longitude, latitude)
+    //get lat and lon, make variable for city name get from user input 
+    //fetch weather data using lat and lon
+    //render page 2 based on weather codes
 }
 
+
+//convert date to weekday abbreviation for forecasts
+function getShortWeekday(date) {
+    const dateString = new Date(date);
+    const options = { weekday: 'short' };
+    return dateString.toLocaleDateString('en-US', options);
+  }
+
+//fetch weather data 
+async function fetchWeatherData(lon, lat){
+    let weather_api_url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max%2Ctemperature_2m_min%2Cweathercode&forecast_days=4&timezone=auto`
+    
+    const response = await fetch(weather_api_url);
+    const data = await response.json();
+
+    let weatherCode = data['current_weather']['weathercode'];
+    let current_weather = weatherIconMap[weatherCode];
+
+    let current_temp = data['current_weather']['temperature'];
+    console.log(current_weather);
+
+    let forecast_temp_day_one = data['daily']['temperature_2m_max'][1];
+    let forecast_date_day_one = getShortWeekday(data['daily']['time'][1]);
+    let forecast_cond_day_one = data['daily']['weathercode'][1];
+
+    let forecast_temp_day_two = data['daily']['temperature_2m_max'][2];
+    let forecast_date_day_two = getShortWeekday(data['daily']['time'][2]);
+    let forecast_cond_day_two = data['daily']['weathercode'][2];
+
+    let forecast_temp_day_three = data['daily']['temperature_2m_max'][3];
+    let forecast_date_day_three = getShortWeekday(data['daily']['time'][3]);
+    let forecast_cond_day_three = data['daily']['weathercode'][3];
+
+    let weather_data = {
+        'current_conditions': current_weather,
+        'current_temp': current_temp,
+        'temp_day_1': forecast_temp_day_one,
+        'date_day_1': forecast_date_day_one,
+        'cond_day_1': weatherIconMap[forecast_cond_day_one],
+        'temp_day_2': forecast_temp_day_two,
+        'date_day_2': forecast_date_day_two,
+        'cond_day_2': weatherIconMap[forecast_cond_day_two],
+        'temp_day_3': forecast_temp_day_three,
+        'date_day_3': forecast_date_day_three,
+        'cond_day_3': weatherIconMap[forecast_cond_day_three],
+    };
+
+    renderWeatherData(weather_data);
+    renderWeatherText(weather_data);
+    renderAnimation(weather_data);
+    renderForecast(weather_data)
+    switchToWeather()
+}
+
+
 //get weather data based on location and render data when user clicks go button
-goButton.addEventListener('click', async() => {
-    let cityInput = document.getElementById('location-input').value;
-
-    if (!cityInput) {
-        alert('Please enter your city');
-        return 
-    }
-
-    currentCity = cityInput;
-    switchToWeather();
-    await fetchAndRenderWeatherData(currentCity);
-
-
-    if (refreshIntervalId) clearInterval(refreshIntervalId);
-    //refresh every hour
-    refreshIntervalId = setInterval(() => fetchAndRenderWeatherData(currentCity), 3600000);
-
-});
-
+goButton.addEventListener('click', fetchUserCoordinates);
 
 
 //make close and minimise buttons functional with electron
-const minimizeBtn = document.getElementById('minimise-button');
-const closeBtn = document.getElementById('close-button');
+const minimiseButton = document.getElementById('minimise-button');
+const closeButton = document.getElementById('close-button');
 
-minimizeBtn.addEventListener('click', () => {
-  window.electronAPI.minimizeWindow();
-});
-
-closeBtn.addEventListener('click', () => {
-  window.electronAPI.closeWindow();
-});

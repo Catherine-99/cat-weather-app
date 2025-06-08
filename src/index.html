@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cat-weather-app</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="index.css">
 
 </head>
 
@@ -12,16 +12,16 @@
     <main>
         <header>
             <button id="back-button" class="left-button">
-                <img src="{{ url_for('static', filename='assets/backbutton.png') }}">
+                <img src="assets/backbutton.png">
             </button>
 
             <section class="right-button">
                 <button id="minimise-button" >
-                    <img src="{{url_for('static', filename='assets/minimiseapp.png') }}">
+                    <img src="assets/minimiseapp.png">
                 </button>
     
                 <button id="close-button">
-                    <img src="{{url_for('static', filename='/assets/closeapp.png') }}">
+                    <img src="assets/closeapp.png">
                 </button>
             </section>
             
@@ -69,7 +69,7 @@
 
     </main>
 
-    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
