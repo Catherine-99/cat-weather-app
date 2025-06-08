@@ -1,6 +1,8 @@
 # Cat Weather Widget
 
 A cute little weather widget with an animated cat that changes its outfit based on real-time weather conditions.
+
+
 <img width="200" alt="Screenshot 2025-06-08 at 20 51 00" src="https://github.com/user-attachments/assets/fa486b0f-e9ff-4f57-b3a6-86f1dbf435c9" />
 <img width="200" alt="Screenshot 2025-06-08 at 20 50 40" src="https://github.com/user-attachments/assets/c40a007f-d316-4116-91cc-78c8079a726f" />
 <img width="200" alt="Screenshot 2025-06-08 at 20 50 18" src="https://github.com/user-attachments/assets/08e735b1-0c07-4b21-a795-5e72c1eb091c" />
